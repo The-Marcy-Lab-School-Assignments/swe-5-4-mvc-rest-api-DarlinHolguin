@@ -10,10 +10,12 @@ In this assignment, you will build a **Todo Tracker** REST API in two parts:
 A fully functional frontend is already provided. Your job is to build the server that powers it.
 
 Refer to the associated lessons for support:
-* [RESTful CRUD APIs](https://marcylabschool.gitbook.io/marcy-lab-school-docs/mod-5-servers/7-rest-crud-api)
-* [Model-View-Controller Architecture](https://marcylabschool.gitbook.io/marcy-lab-school-docs/mod-5-servers/8-model-view-controller)
+
+- [RESTful CRUD APIs](https://marcylabschool.gitbook.io/marcy-lab-school-docs/mod-5-servers/7-rest-crud-api)
+- [Model-View-Controller Architecture](https://marcylabschool.gitbook.io/marcy-lab-school-docs/mod-5-servers/8-model-view-controller)
 
 **Table of Contents**
+
 - [Setup](#setup)
 - [Short Response Questions](#short-response-questions)
 - [Part 1 — RESTful CRUD API](#part-1--restful-crud-api)
@@ -58,31 +60,31 @@ Your grade on Part 1 will be determined by the number of requirements you comple
 
 **`GET /api/todos`**
 
-- [ ] Returns a `200` status and an array of all todos
+- [x] Returns a `200` status and an array of all todos
 
 **`GET /api/todos/:id`**
 
-- [ ] Returns a `200` status and the todo with the matching id
-- [ ] Returns a `404` status if no todo has that id
+- [x] Returns a `200` status and the todo with the matching id
+- [x] Returns a `404` status if no todo has that id
 
 **`POST /api/todos`**
 
-- [ ] Returns a `201` status and the newly created todo
-- [ ] Returns a `400` status if `task` is missing from the request body
+- [x] Returns a `201` status and the newly created todo
+- [x] Returns a `400` status if `task` is missing from the request body
 
 **`PATCH /api/todos/:id`**
 
-- [ ] Returns a `200` status and the updated todo
-- [ ] Returns a `404` status if no todo has that id
+- [x] Returns a `200` status and the updated todo
+- [x] Returns a `404` status if no todo has that id
 
 **`DELETE /api/todos/:id`**
 
-- [ ] Returns a `204` status and no content
-- [ ] Returns a `404` status if no todo has that id
+- [x] Returns a `204` status and no content
+- [x] Returns a `404` status if no todo has that id
 
 **Catch-all**
 
-- [ ] A catch-all handler returns a `404` status for any unmatched route
+- [x] A catch-all handler returns a `404` status for any unmatched route
 
 ### Step 1 — Start the Server
 
@@ -117,10 +119,11 @@ Every todo has this shape: `{ id: Number, task: String, isDone: Boolean }`
 | POST   | `/api/todos`     | `{ task: String }`    | 201, new todo       | 400 if `task` missing |
 | PATCH  | `/api/todos/:id` | `{ isDone: Boolean }` | 200, updated todo   | 404 if not found      |
 | DELETE | `/api/todos/:id` | —                     | 204, no content     | 404 if not found      |
-| *      | *                | —                     | —                   | 404                   |
+| \*     | \*               | —                     | —                   | 404                   |
 
 Notice the REST conventions reflected in this contract:
-- **Resource-based URLs** — `/api/todos` and `/api/todos/:id` identify the *resource*, not the action (e.g. not `/api/getTodos` or `/api/deleteTodo`)
+
+- **Resource-based URLs** — `/api/todos` and `/api/todos/:id` identify the _resource_, not the action (e.g. not `/api/getTodos` or `/api/deleteTodo`)
 - **HTTP methods express the action** — `GET` reads, `POST` creates, `PATCH` updates, `DELETE` removes
 - **Status codes communicate the result** — `201` for created, `204` for no content, `400` for bad input, `404` for not found
 
@@ -144,6 +147,7 @@ git commit -m "Part 1: monolithic Todo API"
 ### Part 2 Grading
 
 Your grade on Part 2 will be determined by the number of requirements you complete. Part 2 has 7 requirements:
+
 - 2 model requirements
 - 2 controller requirements
 - 2 index.js requirements
@@ -151,22 +155,22 @@ Your grade on Part 2 will be determined by the number of requirements you comple
 
 **Model Requirements**
 
-- [ ] `server/models/todoModel.js` exists with a `todos` array only accessible within the file (not exported)
-- [ ] `server/models/todoModel.js` exports methods whose sole responsibility is to manage interactions with the `todos` array
+- [x] `server/models/todoModel.js` exists with a `todos` array only accessible within the file (not exported)
+- [x] `server/models/todoModel.js` exports methods whose sole responsibility is to manage interactions with the `todos` array
 
 **Controller Requirements**
 
-- [ ] `server/controllers/todoControllers.js` exists and imports `todoModel`
-- [ ] `server/controllers/todoControllers.js` exports methods whose sole responsibility is to parse requests, invoke `todoModel` methods, and send a response
+- [x] `server/controllers/todoControllers.js` exists and imports `todoModel`
+- [x] `server/controllers/todoControllers.js` exports methods whose sole responsibility is to parse requests, invoke `todoModel` methods, and send a response
 
 **`index.js` Requirements**
 
-- [ ] `server/index.js` imports and uses `todoControllers`
-- [ ] `server/index.js` contains only middleware and route registrations (no data or business logic)
+- [x] `server/index.js` imports and uses `todoControllers`
+- [x] `server/index.js` contains only middleware and route registrations (no data or business logic)
 
 **Deployment**
 
-- [ ] Your app is deployed to Render and the link is added to the top of this README
+- [] Your app is deployed to Render and the link is added to the top of this README
 
 ### Step 3 — Create the Model
 
@@ -242,11 +246,11 @@ Refactor `server/index.js` so it:
 4. Removes the `todos` array, `getId`, and all inline route logic
 
 ```js
-app.get('/api/todos', todoControllers.listTodos);
-app.get('/api/todos/:id', todoControllers.findTodo);
-app.post('/api/todos', todoControllers.createTodo);
-app.patch('/api/todos/:id', todoControllers.updateTodo);
-app.delete('/api/todos/:id', todoControllers.deleteTodo);
+app.get("/api/todos", todoControllers.listTodos);
+app.get("/api/todos/:id", todoControllers.findTodo);
+app.post("/api/todos", todoControllers.createTodo);
+app.patch("/api/todos/:id", todoControllers.updateTodo);
+app.delete("/api/todos/:id", todoControllers.deleteTodo);
 ```
 
 **When done, commit your Part 2 work on the `draft-refactor` branch:**
@@ -272,12 +276,12 @@ Then add the deployed link to the top of this README.
 
 The following error codes are commonly used by APIs:
 
-* Success Responses
-  * `200` OK — Standard success (GET, PATCH).
-  * `201` Created — Resource was created (POST).
-  * `204` No Content — Successful but no response body (DELETE).
-* Client Errors
-  * `400` Bad Request — Input is invalid (e.g. missing required field).
-  * `404` Not Found — Resource doesn't exist (e.g. id not found).
-* Server Errors
-  * `500` Internal Server Error — Unexpected error on your backend.
+- Success Responses
+  - `200` OK — Standard success (GET, PATCH).
+  - `201` Created — Resource was created (POST).
+  - `204` No Content — Successful but no response body (DELETE).
+- Client Errors
+  - `400` Bad Request — Input is invalid (e.g. missing required field).
+  - `404` Not Found — Resource doesn't exist (e.g. id not found).
+- Server Errors
+  - `500` Internal Server Error — Unexpected error on your backend.
