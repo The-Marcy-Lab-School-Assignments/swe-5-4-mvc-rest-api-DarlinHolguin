@@ -78,3 +78,9 @@ const createTodo = (req, res) => {
 Line number 1 belongs in the the controller. It belongs in the controller because this is where the controller converts user action, when the variable `task` is being assigned to the request body, its the applications way of reaching into the HTTP request body, `req.body` is a Javascript object that Express fills when it parses the request. The entire purpose of the controller is like I mentioned to convert, to be more specific it connects HTTP request and app logic.
 
 Line number 2 belongs in the controller, it belongs in the controller because its setting a guard clause, if no task is provided in the `req.body` it sends back a `400`(Bad request) status code and sends a message that tells the client the request was invalid.
+
+Line number 3 belongs in the model. What this line is doing is creating a new todo object, and it assigns a unique `id` using `getId()`, stores the `task`, and then sets `isDone` to `false`. It belongs in the model because its data logic, and the model owns data structure.
+
+Line number 4 belongs in the model because this line pushes the newly created todo into the `todos` array, this is where data is being stored. It is directly mutating the data array meaning its apart of data management, the model should be the only layer that ever comes into contact with the `todos` array directly.
+
+Line number 5 belongs in the controller. This line sends the **HTTP** response back to the client along with the status code `201` and the new created todo. Sending a response is the controllers job because it takes the result that was returned by the model and transfers it back over to HTTP.
